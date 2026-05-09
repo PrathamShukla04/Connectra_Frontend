@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const TermsAndConditions = () => {
+const DeliveryPolicy = () => {
   // 🔹 Ref for background stars
   const rootRef = useRef(null);
 
@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
   }, []);
 
   return (
-    <main
+    <div
       ref={rootRef}
       className="min-h-screen bg-gradient-to-br from-[#0a0820] via-[#12104a] to-[#05030f] text-white px-6 py-20 relative overflow-hidden"
     >
@@ -36,73 +36,78 @@ const TermsAndConditions = () => {
         {/* 🔹 Header */}
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-widest text-indigo-300 bg-indigo-500/10 px-4 py-1 rounded-full border border-indigo-400/20">
-            Legal
+            Policy
           </span>
 
           <h1 className="mt-4 text-4xl md:text-5xl font-semibold bg-gradient-to-r from-indigo-200 via-indigo-400 to-purple-400 text-transparent bg-clip-text">
-            Terms & Conditions
+            Delivery Policy
           </h1>
 
           <p className="mt-4 text-indigo-200/60 text-sm max-w-md mx-auto">
-            Please read these terms carefully before using our platform and services.
+            Understand how and when your purchased services are delivered.
           </p>
         </div>
 
         {/* 🔹 Content Card */}
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)] space-y-6">
 
-          {/* 🔹 Intro */}
-          <p className="text-indigo-200/70 text-sm md:text-base leading-relaxed">
-            These Terms and Conditions govern your use of the Connectra platform.
-            By accessing or using our services, you agree to comply with these terms.
-          </p>
-
-          {/* 🔹 Rules List */}
+          {/* 🔹 Section 1 */}
           <div>
             <h2 className="text-lg font-semibold text-indigo-300 mb-2">
-              User Responsibilities
+              Digital Delivery
             </h2>
-
-            <ul className="list-disc list-inside space-y-2 text-indigo-200/70 text-sm">
-              <li>
-                You agree to use our platform in a lawful and responsible manner.
-              </li>
-              <li>
-                All payments must be made through approved and secure channels.
-              </li>
-              <li>
-                All content and materials belong to{" "}
-                <span className="text-indigo-300 font-medium">
-                  Connectra
-                </span>{" "}
-                and may not be copied or reused without permission.
-              </li>
-            </ul>
+            <p className="text-indigo-200/70 text-sm leading-relaxed">
+              All our products and services are delivered digitally. No physical
+              items are shipped.
+            </p>
           </div>
 
-          {/* 🔹 Agreement */}
+          {/* 🔹 Section 2 */}
           <div>
             <h2 className="text-lg font-semibold text-indigo-300 mb-2">
-              Acceptance of Terms
+              Delivery Timeframe
             </h2>
-
             <p className="text-indigo-200/70 text-sm leading-relaxed">
-              By continuing to use our services, you acknowledge that you have
-              read and agree to these Terms and Conditions. If you do not agree,
-              please discontinue use of the platform.
+              After successful payment, you will receive access credentials or
+              service activation details via your registered email within
+              <span className="text-indigo-300 font-medium"> 1 hour</span>.
+            </p>
+          </div>
+
+          {/* 🔹 Section 3 */}
+          <div>
+            <h2 className="text-lg font-semibold text-indigo-300 mb-2">
+              Delivery Issues
+            </h2>
+            <p className="text-indigo-200/70 text-sm leading-relaxed">
+              If you do not receive your access details within the expected time,
+              please check your spam folder or contact our support team.
+            </p>
+          </div>
+
+          {/* 🔹 Section 4 */}
+          <div>
+            <h2 className="text-lg font-semibold text-indigo-300 mb-2">
+              Contact Support
+            </h2>
+            <p className="text-indigo-200/70 text-sm leading-relaxed">
+              For any delivery-related concerns, reach out to us at:
+            </p>
+            <p className="text-indigo-300 font-medium mt-2">
+              support@connectra.com
             </p>
           </div>
 
           {/* 🔹 Footer Note */}
           <div className="pt-4 border-t border-white/10 text-xs text-indigo-200/40">
-            Effective date: July 2026
+            Last updated: July 2026
           </div>
 
         </div>
 
       </div>
-    </main>
+    </div>
   );
 };
 
-export default TermsAndConditions;
+export default DeliveryPolicy;

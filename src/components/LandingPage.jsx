@@ -1,339 +1,752 @@
-// import { motion } from "framer-motion";
-// import {
-//   Users,
-//   Code2,
-//   ShieldCheck,
-//   FolderGit2,
-//   Network,
-//   Laptop2,
-//   Share2,
-// } from "lucide-react";
-// import { useNavigate } from "react-router-dom";
-
-// const LandingPage = () => {
-//   const navigate = useNavigate();
-
-//   const containerVariants = {
-//     hidden: {},
-//     show: {
-//       transition: {
-//         staggerChildren: 0.15,
-//       },
-//     },
-//   };
-
-//   const fadeUpVariant = {
-//     hidden: { opacity: 0, y: 40 },
-//     show: {
-//       opacity: 1,
-//       y: 0,
-//       transition: {
-//         type: "spring",
-//         stiffness: 50,
-//         damping: 10,
-//       },
-//     },
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-white font-sans text-gray-800">
-//       {/* Navbar */}
-//       <nav className="flex justify-between items-center px-8 py-5 shadow-sm bg-white/90 backdrop-blur-md sticky top-0 z-50">
-//         <div className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-//           <Code2 className="text-blue-600" />
-//           CodeConnect
-//         </div>
-
-//         <button
-//           onClick={() => navigate("/login")}
-//           className="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition duration-300 shadow-md"
-//         >
-//           Sign in
-//         </button>
-//       </nav>
-
-//       {/* Hero Section */}
-//       <section className="flex flex-col-reverse md:flex-row items-center justify-between px-8 md:px-20 py-20 gap-10">
-//         {/* Left */}
-//         <motion.div
-//           className="md:w-1/2 text-center md:text-left space-y-6"
-//           variants={fadeUpVariant}
-//           initial="hidden"
-//           animate="show"
-//         >
-//           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
-//             Connect with <br className="hidden md:block" />
-//             <span className="text-blue-600">Developers Worldwide</span>
-//           </h1>
-//           <p className="text-gray-600 text-lg">
-//             Collaborate, build, and grow together — all in one platform.
-//           </p>
-//           <div className="flex justify-center md:justify-start gap-4 pt-2">
-//             <button
-//               onClick={() => navigate("/login")}
-//               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-lg"
-//             >
-//               Get Started
-//             </button>
-//             <button className="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-100 transition shadow-sm">
-//               Learn More
-//             </button>
-//           </div>
-//         </motion.div>
-
-//         {/* Right */}
-//         <motion.div
-//           className="md:w-1/2 flex justify-center relative"
-//           initial={{ opacity: 0, scale: 0.8 }}
-//           animate={{ opacity: 1, scale: 1 }}
-//           transition={{ type: "spring", duration: 1 }}
-//         >
-//           <div className="relative w-72 h-72 md:w-96 md:h-96 bg-white/30 backdrop-blur-lg border border-blue-100 rounded-full shadow-lg flex items-center justify-center">
-//             <div className="absolute top-2 left-2">
-//               <Laptop2 className="text-blue-500 w-8 h-8" />
-//             </div>
-//             <div className="absolute top-2 right-2">
-//               <Network className="text-blue-500 w-8 h-8" />
-//             </div>
-//             <div className="absolute bottom-2 left-2">
-//               <Share2 className="text-blue-500 w-8 h-8" />
-//             </div>
-//             <div className="absolute bottom-2 right-2">
-//               <Code2 className="text-blue-500 w-8 h-8" />
-//             </div>
-//             <Users className="text-blue-600 w-24 h-24" />
-//           </div>
-//         </motion.div>
-//       </section>
-
-//       {/* Features Section */}
-//      <section className="bg-blue-50 py-10 px-8 md:px-20 mt-[-40px]">
-
-//         <motion.div
-//           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 text-center"
-//           variants={containerVariants}
-//           initial="hidden"
-//           whileInView="show"
-//           viewport={{ once: true }}
-//         >
-//           {[
-//             {
-//               icon: <Network className="text-blue-600 w-10 h-10 mx-auto" />,
-//               title: "Networking",
-//               desc: "Expand your network effortlessly.",
-//             },
-//             {
-//               icon: <FolderGit2 className="text-blue-600 w-10 h-10 mx-auto" />,
-//               title: "Collaboration",
-//               desc: "Work together in real-time.",
-//             },
-//             {
-//               icon: <ShieldCheck className="text-blue-600 w-10 h-10 mx-auto" />,
-//               title: "Security",
-//               desc: "Keep your projects secure.",
-//             },
-//           ].map((feature, idx) => (
-//             <motion.div
-//               key={idx}
-//               className="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition-all duration-300"
-//               variants={fadeUpVariant}
-//             >
-//               {feature.icon}
-//               <h3 className="font-semibold text-xl mt-4">{feature.title}</h3>
-//               <p className="text-gray-600 mt-2">{feature.desc}</p>
-//             </motion.div>
-//           ))}
-//         </motion.div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default LandingPage;
-
-
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import {
-Users,
-Code2,
-ShieldCheck,
-FolderGit2,
-Network,
-Laptop2,
-Share2,
-Search,
+  Users, Code2, ShieldCheck, FolderGit2,
+  Network, Laptop2, Share2, Zap, Globe, Lock,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
-const LandingPage = () => {
-const navigate = useNavigate();
-
-const [search, setSearch] = useState("");
-
-const containerVariants = {
-hidden: {},
-show: {
-transition: { staggerChildren: 0.15 },
-},
+/* ── Animated counter ── */
+const Counter = ({ to, suffix = "" }) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    const controls = animate(0, to, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate(v) {
+        if (ref.current) ref.current.textContent = Math.round(v).toLocaleString() + suffix;
+      },
+    });
+    return controls.stop;
+  }, [to, suffix]);
+  return <span ref={ref}>0</span>;
 };
 
-const fadeUpVariant = {
-hidden: { opacity: 0, y: 40 },
-show: {
-opacity: 1,
-y: 0,
-transition: { type: "spring", stiffness: 50, damping: 10 },
-},
+/* ── Star canvas ── */
+const StarCanvas = () => {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let W = (canvas.width = window.innerWidth);
+    let H = (canvas.height = window.innerHeight);
+    const stars = Array.from({ length: 120 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.2,
+      a: Math.random(),
+      da: (Math.random() - 0.5) * 0.005,
+    }));
+    let raf;
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      stars.forEach((s) => {
+        s.a += s.da;
+        if (s.a <= 0 || s.a >= 1) s.da *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(148,163,255,${s.a * 0.7})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+    const onResize = () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+    />
+  );
 };
 
-return ( <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#1a1a40] to-[#0f0c29] text-gray-200 overflow-hidden">
-
-
-  {/* Glow Background */}
-  <div className="absolute w-96 h-96 bg-blue-500/20 blur-3xl rounded-full top-[-120px] left-[-120px] animate-pulse"></div>
-  <div className="absolute w-96 h-96 bg-indigo-500/20 blur-3xl rounded-full bottom-[-120px] right-[-120px] animate-pulse"></div>
-
-  {/* Navbar */}
-  <nav className="flex justify-between items-center px-8 md:px-20 py-6 border-b border-white/10 backdrop-blur-xl">
-
-    <div className="text-2xl font-bold flex items-center gap-2">
-      <Code2 className="text-blue-500" />
-      Connectra
-    </div>
-
-    <button
-      onClick={() => navigate("/login")}
-      className="bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-2 rounded-lg hover:scale-105 transition"
-    >
-      Sign In
-    </button>
-
-  </nav>
-
-  {/* HERO */}
-  <section className="flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-24 gap-16">
-
-    {/* LEFT */}
-    <motion.div
-      className="md:w-1/2 space-y-6"
-      variants={fadeUpVariant}
-      initial="hidden"
-      animate="show"
-    >
-
-      <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-        Connect with
-        <span className="block text-blue-400">
-          Developers Worldwide
-        </span>
-      </h1>
-
-      <p className="text-gray-400 text-lg">
-        Discover developers, collaborate on projects, and grow your tech network.
-      </p>
-
-
-
-      {/* CTA */}
-      <div className="flex gap-4 pt-2">
-
-        <button
-          onClick={() => navigate("/signup")}
-          className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 rounded-lg hover:scale-105 transition shadow-lg"
-        >
-          Get Started
-        </button>
-
-        <button className="border border-white/20 px-6 py-3 rounded-lg hover:bg-white/10 transition">
-          Learn More
-        </button>
-
-      </div>
-
-    </motion.div>
-
-    {/* RIGHT GRAPHIC */}
-    <motion.div
-      className="md:w-1/2 flex justify-center"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ type: "spring", duration: 1 }}
-    >
-
-      <div className="relative w-80 h-80 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center shadow-xl">
-
-        <div className="absolute top-4 left-4">
-          <Laptop2 className="text-blue-400 w-8 h-8" />
-        </div>
-
-        <div className="absolute top-4 right-4">
-          <Network className="text-blue-400 w-8 h-8" />
-        </div>
-
-        <div className="absolute bottom-4 left-4">
-          <Share2 className="text-blue-400 w-8 h-8" />
-        </div>
-
-        <div className="absolute bottom-4 right-4">
-          <Code2 className="text-blue-400 w-8 h-8" />
-        </div>
-
-        <Users className="text-blue-500 w-24 h-24" />
-
-      </div>
-
-    </motion.div>
-
-  </section>
-
-  {/* FEATURES */}
-  <section className="px-8 md:px-20 pb-24">
-
-    <motion.div
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
-    >
-
-      {[
-        {
-          icon: <Network className="text-blue-400 w-10 h-10 mx-auto" />,
-          title: "Developer Networking",
-          desc: "Meet developers from around the globe.",
-        },
-        {
-          icon: <FolderGit2 className="text-blue-400 w-10 h-10 mx-auto" />,
-          title: "Project Collaboration",
-          desc: "Build and collaborate on projects.",
-        },
-        {
-          icon: <ShieldCheck className="text-blue-400 w-10 h-10 mx-auto" />,
-          title: "Secure Platform",
-          desc: "Your data and projects stay safe.",
-        },
-      ].map((feature, idx) => (
+/* ── Orbiting icon ring ── */
+const OrbitRing = ({ radius, duration, icons, colorClass }) => (
+  <div
+    className="absolute"
+    style={{
+      width: radius * 2,
+      height: radius * 2,
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%,-50%)",
+    }}
+  >
+    {icons.map((Icon, i) => {
+      return (
         <motion.div
-          key={idx}
-          className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl text-center hover:scale-105 transition"
-          variants={fadeUpVariant}
+          key={i}
+          className="absolute"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: 40,
+            height: 40,
+            marginTop: -20,
+            marginLeft: -20,
+          }}
+          animate={{ rotate: 360 }}
+          transition={{
+            repeat: Infinity,
+            duration,
+            ease: "linear",
+            delay: -(duration / icons.length) * i,
+          }}
         >
-          {feature.icon}
-          <h3 className="font-semibold text-xl mt-4">{feature.title}</h3>
-          <p className="text-gray-400 mt-2">{feature.desc}</p>
+          <motion.div
+            className="absolute flex items-center justify-center rounded-[10px] backdrop-blur-sm"
+            style={{
+              top: -radius,
+              left: "50%",
+              marginLeft: -20,
+              width: 40,
+              height: 40,
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.12)",
+            }}
+            animate={{ rotate: -360 }}
+            transition={{
+              repeat: Infinity,
+              duration,
+              ease: "linear",
+              delay: -(duration / icons.length) * i,
+            }}
+          >
+            <Icon size={18} className={colorClass} />
+          </motion.div>
         </motion.div>
-      ))}
-
-    </motion.div>
-
-  </section>
-
-</div>
-
-
+      );
+    })}
+  </div>
 );
+
+/* ── Tilt card ── */
+const TiltCard = ({ children, className, style }) => {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(x, [-0.5, 0.5], [-6, 6]);
+  const onMove = (e) => {
+    const r = ref.current.getBoundingClientRect();
+    x.set((e.clientX - r.left) / r.width - 0.5);
+    y.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const onLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", ...style }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/* ══════════════ MAIN ══════════════ */
+const LandingPage = () => {
+  const navigate = useNavigate();
+
+  const features = [
+    {
+      icon: Network,
+      title: "Developer Networking",
+      desc: "Connect with 50k+ developers across 120 countries. Find collaborators, mentors, and friends in tech.",
+      accent: "#60a5fa",
+      bg: "rgba(96,165,250,0.08)",
+      border: "rgba(96,165,250,0.2)",
+    },
+    {
+      icon: FolderGit2,
+      title: "Project Collaboration",
+      desc: "Build in public. Fork ideas, open PRs, and ship products together with your global team.",
+      accent: "#a78bfa",
+      bg: "rgba(167,139,250,0.08)",
+      border: "rgba(167,139,250,0.2)",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Secure Platform",
+      desc: "Enterprise-grade encryption, 2FA, and privacy controls baked in from day one.",
+      accent: "#34d399",
+      bg: "rgba(52,211,153,0.08)",
+      border: "rgba(52,211,153,0.2)",
+    },
+    {
+      icon: Globe,
+      title: "Global Discovery",
+      desc: "Trending repos, featured devs, and real-time activity feeds curated just for you.",
+      accent: "#f472b6",
+      bg: "rgba(244,114,182,0.08)",
+      border: "rgba(244,114,182,0.2)",
+    },
+    {
+      icon: Zap,
+      title: "Real-time Collab",
+      desc: "Live cursors, instant messaging, and co-editing tools that keep teams in sync.",
+      accent: "#fbbf24",
+      bg: "rgba(251,191,36,0.08)",
+      border: "rgba(251,191,36,0.2)",
+    },
+    {
+      icon: Lock,
+      title: "Private Spaces",
+      desc: "Invite-only rooms for stealth projects, secure code reviews, and NDA-protected work.",
+      accent: "#38bdf8",
+      bg: "rgba(56,189,248,0.08)",
+      border: "rgba(56,189,248,0.2)",
+    },
+  ];
+
+  const stats = [
+    { value: 50000, suffix: "+", label: "Developers" },
+    { value: 12000, suffix: "+", label: "Projects" },
+    { value: 120, suffix: "+", label: "Countries" },
+    { value: 98, suffix: "%", label: "Uptime" },
+  ];
+
+  const stagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1 } },
+  };
+  const fadeUp = {
+    hidden: { opacity: 0, y: 32 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 60, damping: 14 },
+    },
+  };
+
+  return (
+    <>
+      {/* Google Fonts */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+        .font-syne { font-family: 'Syne', sans-serif; }
+        .font-dm { font-family: 'DM Sans', sans-serif; }
+
+        /* grid texture */
+        .lp-grid-bg::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+          background-size: 60px 60px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* noise overlay */
+        .lp-noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+          opacity: 0.4;
+        }
+
+        /* eyebrow pulse */
+        .lp-pulse {
+          animation: lpPulse 2s infinite;
+        }
+        @keyframes lpPulse {
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        /* gradient text */
+        .lp-grad-text {
+          background: linear-gradient(135deg, #818cf8 0%, #a78bfa 40%, #60a5fa 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .lp-stat-grad {
+          background: linear-gradient(135deg, #e0e7ff, #818cf8);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .lp-feat-title-grad {
+          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        /* feat card hover line */
+        .lp-feat-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; height: 1px;
+          opacity: 0;
+          transition: opacity 0.25s;
+        }
+        .lp-feat-card:hover::before { opacity: 1; }
+
+        /* orbit ring dashed */
+        .lp-orbit-dashed {
+          border: 1px dashed rgba(255,255,255,0.07);
+        }
+
+        /* banner shine */
+        .lp-banner::before {
+          content: '';
+          position: absolute; inset: 0;
+          border-radius: 24px;
+          background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%);
+          pointer-events: none;
+        }
+      `}</style>
+
+      <div
+        className="lp-grid-bg font-dm relative min-h-screen overflow-x-hidden"
+        style={{ background: "#060614", color: "#e2e8f0" }}
+      >
+        <StarCanvas />
+
+        {/* Noise */}
+        <div className="lp-noise fixed inset-0 pointer-events-none z-0" />
+
+        {/* Glow orbs */}
+        <div className="fixed inset-0 pointer-events-none z-0">
+          <div
+            className="absolute rounded-full"
+            style={{
+              width: 600,
+              height: 600,
+              background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
+              top: -200,
+              left: -200,
+              filter: "blur(60px)",
+            }}
+          />
+          <div
+            className="absolute rounded-full"
+            style={{
+              width: 500,
+              height: 500,
+              background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
+              bottom: -150,
+              right: -150,
+              filter: "blur(60px)",
+            }}
+          />
+        </div>
+
+        {/* ── NAV ── */}
+        <nav
+          className="relative z-10 flex justify-between items-center px-20 py-5 backdrop-blur-xl"
+          style={{
+            borderBottom: "1px solid rgba(255,255,255,0.05)",
+            background: "rgba(6,6,20,0.6)",
+          }}
+        >
+          <div className="font-syne text-[22px] font-extrabold text-white flex items-center gap-2.5 tracking-tight">
+            <div
+              className="w-2 h-2 rounded-full"
+              style={{ background: "#6366f1", boxShadow: "0 0 12px #6366f1" }}
+            />
+            Connectra
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              className="font-dm text-[13px] font-medium px-5 py-2 rounded-[10px] transition-all duration-200 cursor-pointer"
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(255,255,255,0.12)",
+                color: "rgba(255,255,255,0.7)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                e.currentTarget.style.color = "#fff";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+              }}
+              onClick={() => navigate("/about")}
+            >
+              About
+            </button>
+            <button
+              className="font-dm text-[13px] font-medium px-5 py-2 rounded-[10px] transition-all duration-200 cursor-pointer"
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(255,255,255,0.12)",
+                color: "rgba(255,255,255,0.7)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                e.currentTarget.style.color = "#fff";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+              }}
+              onClick={() => navigate("/features")}
+            >
+              Features
+            </button>
+            <button
+              className="font-dm text-[13px] font-semibold px-[22px] py-[9px] rounded-[10px] text-white border-none cursor-pointer transition-all duration-200"
+              style={{
+                background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                boxShadow: "0 0 20px rgba(99,102,241,0.35)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "0 0 30px rgba(99,102,241,0.55)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 0 20px rgba(99,102,241,0.35)";
+              }}
+              onClick={() => navigate("/login")}
+            >
+              Sign In →
+            </button>
+          </div>
+        </nav>
+
+        {/* ── HERO ── */}
+        <section className="relative z-[1] flex flex-row items-center justify-between px-20 pt-[100px] pb-20 gap-[60px] max-[900px]:flex-col max-[900px]:px-6 max-[900px]:pt-16">
+          <motion.div
+            className="flex-1 max-w-[560px]"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.div variants={fadeUp}>
+              <div
+                className="inline-flex items-center gap-2 rounded-[20px] px-[14px] py-[5px] text-[11px] font-medium tracking-widest uppercase mb-7"
+                style={{
+                  background: "rgba(99,102,241,0.12)",
+                  border: "1px solid rgba(99,102,241,0.3)",
+                  color: "#a5b4fc",
+                }}
+              >
+                <span
+                  className="lp-pulse w-[6px] h-[6px] rounded-full"
+                  style={{ background: "#818cf8" }}
+                />
+                Now in Public Beta
+              </div>
+            </motion.div>
+
+            <motion.h1
+              className="font-syne font-extrabold text-white mb-[22px]"
+              style={{
+                fontSize: "clamp(38px, 5.5vw, 68px)",
+                lineHeight: 1.05,
+                letterSpacing: "-2px",
+              }}
+              variants={fadeUp}
+            >
+              Where Builders
+              <span className="lp-grad-text block">Connect & Ship</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-[16px] mb-10 max-w-[460px]"
+              style={{ color: "rgba(148,163,184,0.85)", lineHeight: 1.75 }}
+              variants={fadeUp}
+            >
+              Connectra is the professional network built for developers — discover collaborators,
+              showcase your work, and build the future together.
+            </motion.p>
+
+            <motion.div className="flex gap-3 flex-wrap" variants={fadeUp}>
+              <button
+                className="font-dm text-[14px] font-semibold text-white px-8 py-[14px] rounded-xl border-none cursor-pointer flex items-center gap-2 transition-all duration-[250ms]"
+                style={{
+                  background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  boxShadow: "0 0 28px rgba(99,102,241,0.4)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 0 40px rgba(99,102,241,0.6)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 0 28px rgba(99,102,241,0.4)";
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
+                onClick={() => navigate("/signup")}
+              >
+                Get Started Free <span className="text-[16px]">→</span>
+              </button>
+              <button
+                className="font-dm text-[14px] font-medium px-7 py-[14px] rounded-xl cursor-pointer transition-all duration-200"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  color: "rgba(255,255,255,0.75)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)";
+                  e.currentTarget.style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                  e.currentTarget.style.color = "rgba(255,255,255,0.75)";
+                }}
+                onClick={() => navigate("/explore")}
+              >
+                Explore Projects
+              </button>
+            </motion.div>
+          </motion.div>
+
+          {/* ORBIT GRAPHIC */}
+          <motion.div
+            className="flex-1 flex justify-center items-center relative max-w-[440px]"
+            style={{ height: 440 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", duration: 1.2, delay: 0.3 }}
+          >
+            {[180, 280, 380].map((d, i) => (
+              <div
+                key={i}
+                className="absolute lp-orbit-dashed rounded-full"
+                style={{
+                  width: d,
+                  height: d,
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%,-50%)",
+                  opacity: 0.5 - i * 0.12,
+                }}
+              />
+            ))}
+
+            <OrbitRing radius={96} duration={10} icons={[Code2, Users]} colorClass="text-blue-400" />
+            <OrbitRing
+              radius={148}
+              duration={16}
+              icons={[Network, Share2, Laptop2]}
+              colorClass="text-violet-400"
+            />
+
+            {/* Core */}
+            <div
+              className="absolute w-[120px] h-[120px] rounded-full flex items-center justify-center backdrop-blur-xl"
+              style={{
+                background: "radial-gradient(circle at 40% 40%, rgba(99,102,241,0.6), rgba(139,92,246,0.3))",
+                border: "1px solid rgba(255,255,255,0.15)",
+                boxShadow: "0 0 60px rgba(99,102,241,0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
+              }}
+            >
+              <Users size={44} style={{ color: "#818cf8" }} />
+            </div>
+          </motion.div>
+        </section>
+
+        {/* ── STATS ── */}
+        <motion.div
+          className="relative z-[1] grid grid-cols-4 max-[700px]:grid-cols-2"
+          style={{
+            gap: "1px",
+            background: "rgba(255,255,255,0.05)",
+            borderTop: "1px solid rgba(255,255,255,0.05)",
+            borderBottom: "1px solid rgba(255,255,255,0.05)",
+          }}
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {stats.map((s, i) => (
+            <motion.div
+              key={i}
+              className="text-center px-6 py-9"
+              style={{ background: "rgba(6,6,20,0.9)" }}
+              variants={fadeUp}
+            >
+              <div
+                className="lp-stat-grad font-syne font-extrabold"
+                style={{ fontSize: 38, letterSpacing: "-1.5px" }}
+              >
+                <Counter to={s.value} suffix={s.suffix} />
+              </div>
+              <div
+                className="text-[12px] mt-1 font-medium uppercase tracking-wider"
+                style={{ color: "rgba(148,163,184,0.6)" }}
+              >
+                {s.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* ── FEATURES ── */}
+        <section className="relative z-[1] px-20 py-[100px] max-[768px]:px-6 max-[768px]:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div
+              className="text-[11px] font-semibold uppercase tracking-[0.12em] mb-3"
+              style={{ color: "#818cf8" }}
+            >
+              Everything you need
+            </div>
+            <div
+              className="font-syne font-extrabold text-white mb-16 max-w-[560px]"
+              style={{
+                fontSize: "clamp(28px, 3.5vw, 44px)",
+                letterSpacing: "-1.5px",
+                lineHeight: 1.1,
+              }}
+            >
+              Built for how{" "}
+              <span className="lp-feat-title-grad">developers actually work</span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-3 gap-5 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {features.map((f, i) => (
+              <motion.div key={i} variants={fadeUp}>
+                <TiltCard
+                  className="lp-feat-card relative overflow-hidden rounded-[20px] p-8 cursor-default transition-all duration-[250ms]"
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "rgba(255,255,255,0.03)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-5"
+                    style={{ background: f.bg, border: `1px solid ${f.border}` }}
+                  >
+                    <f.icon size={22} style={{ color: f.accent }} />
+                  </div>
+                  <div
+                    className="font-syne font-bold text-[17px] mb-2.5"
+                    style={{ color: "#e2e8f0", letterSpacing: "-0.3px" }}
+                  >
+                    {f.title}
+                  </div>
+                  <div
+                    className="text-[13.5px]"
+                    style={{ color: "rgba(148,163,184,0.7)", lineHeight: 1.7 }}
+                  >
+                    {f.desc}
+                  </div>
+                  <style>{`.lp-feat-card:nth-child(${i + 1})::before { background: linear-gradient(90deg, transparent, ${f.accent}66, transparent); }`}</style>
+                </TiltCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* ── CTA BANNER ── */}
+        <motion.div
+          className="lp-banner relative z-[1] mx-20 mb-[100px] rounded-[24px] px-[60px] py-16 text-center overflow-hidden max-[768px]:mx-6 max-[768px]:mb-16 max-[768px]:px-7 max-[768px]:py-10"
+          style={{
+            background: "linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.1) 100%)",
+            border: "1px solid rgba(99,102,241,0.25)",
+          }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <div
+            className="font-syne font-extrabold text-white mb-4"
+            style={{
+              fontSize: "clamp(26px, 3.5vw, 42px)",
+              letterSpacing: "-1.5px",
+              lineHeight: 1.1,
+            }}
+          >
+            Ready to build together?
+          </div>
+          <div
+            className="text-[15px] mb-9 max-w-[480px] mx-auto"
+            style={{ color: "rgba(199,210,254,0.7)", lineHeight: 1.7 }}
+          >
+            Join 50,000+ developers already on Connectra. Free forever for open source.
+          </div>
+          <button
+            className="font-dm text-[14px] font-semibold text-white px-8 py-[14px] rounded-xl border-none cursor-pointer inline-flex items-center gap-2 transition-all duration-[250ms] mx-auto"
+            style={{
+              background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+              boxShadow: "0 0 28px rgba(99,102,241,0.4)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 0 40px rgba(99,102,241,0.6)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "0 0 28px rgba(99,102,241,0.4)";
+            }}
+            onClick={() => navigate("/signup")}
+          >
+            Create your profile <span className="text-[16px]">→</span>
+          </button>
+        </motion.div>
+
+        {/* ── FOOTER ── */}
+        <footer
+          className="relative z-[1] px-20 py-7 flex justify-between items-center flex-wrap gap-3 max-[768px]:px-6 max-[768px]:flex-col max-[768px]:text-center"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+        >
+          <div
+            className="font-syne text-[16px] font-extrabold flex items-center gap-2"
+            style={{ color: "rgba(255,255,255,0.4)" }}
+          >
+            <div
+              className="w-2 h-2 rounded-full"
+              style={{ background: "#6366f1", boxShadow: "0 0 12px #6366f1" }}
+            />
+            Connectra
+          </div>
+          <div className="text-[12px]" style={{ color: "rgba(148,163,184,0.35)" }}>
+            © 2026 Connectra. All rights reserved.
+          </div>
+        </footer>
+      </div>
+    </>
+  );
 };
 
 export default LandingPage;
+

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const ShippingAndDeliveryPolicy = () => {
+const AboutUs = () => {
   // 🔹 Ref for background stars
   const rootRef = useRef(null);
 
-  // 🔹 Generate subtle background stars
+  // 🔹 Generate subtle stars
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -31,68 +31,91 @@ const ShippingAndDeliveryPolicy = () => {
       <div className="absolute bottom-[-120px] right-[-120px] w-[400px] h-[400px] bg-purple-500/20 blur-[120px] rounded-full" />
 
       {/* 🔹 Container */}
-      <div className="max-w-3xl mx-auto relative z-10">
+      <div className="max-w-4xl mx-auto relative z-10">
 
         {/* 🔹 Header */}
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-widest text-indigo-300 bg-indigo-500/10 px-4 py-1 rounded-full border border-indigo-400/20">
-            Policy
+            About
           </span>
 
           <h1 className="mt-4 text-4xl md:text-5xl font-semibold bg-gradient-to-r from-indigo-200 via-indigo-400 to-purple-400 text-transparent bg-clip-text">
-            Shipping & Delivery
+            About Connectra
           </h1>
 
           <p className="mt-4 text-indigo-200/60 text-sm max-w-md mx-auto">
-            Learn how our digital delivery process works and when you can expect access to your services.
+            Learn more about who we are, what we do, and why we built Connectra.
           </p>
         </div>
 
         {/* 🔹 Content Card */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)] space-y-6">
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)] space-y-8">
 
-          {/* 🔹 Section 1 */}
+          {/* 🔹 Intro */}
           <div>
             <h2 className="text-lg font-semibold text-indigo-300 mb-2">
-              Digital Services Only
+              Who We Are
             </h2>
             <p className="text-indigo-200/70 text-sm leading-relaxed">
-              We provide digital services only. Therefore, no physical shipping
-              is required or applicable for any of our products.
+              Connectra is a modern digital platform designed to bring people
+              closer through seamless connections, communication, and services.
+              Our goal is to simplify digital interactions and create a smooth
+              user experience for everyone.
             </p>
           </div>
 
-          {/* 🔹 Section 2 */}
+          {/* 🔹 Mission */}
           <div>
             <h2 className="text-lg font-semibold text-indigo-300 mb-2">
-              Delivery Time
+              Our Mission
             </h2>
             <p className="text-indigo-200/70 text-sm leading-relaxed">
-              Once your payment is successfully completed, access credentials
-              or activation details are delivered to your registered email
-              within 1 hour.
+              We aim to build a reliable and user-friendly platform where users
+              can connect, explore, and grow. Our mission is to deliver value
+              through innovation, simplicity, and trust.
             </p>
           </div>
 
-          {/* 🔹 Section 3 */}
+          {/* 🔹 Vision */}
           <div>
             <h2 className="text-lg font-semibold text-indigo-300 mb-2">
-              Delay or Issues
+              Our Vision
             </h2>
             <p className="text-indigo-200/70 text-sm leading-relaxed">
-              If you experience any delay in receiving your access details,
-              please contact our support team immediately.
+              Our vision is to become a leading digital platform that empowers
+              users globally by offering secure, fast, and intuitive solutions.
             </p>
-            <p className="text-indigo-300 font-medium mt-2">
+          </div>
+
+          {/* 🔹 Why Choose Us */}
+          <div>
+            <h2 className="text-lg font-semibold text-indigo-300 mb-2">
+              Why Choose Us
+            </h2>
+
+            <ul className="list-disc list-inside text-indigo-200/70 text-sm space-y-2">
+              <li>Simple and intuitive user experience</li>
+              <li>Secure and reliable platform</li>
+              <li>Fast digital delivery of services</li>
+              <li>Dedicated customer support</li>
+            </ul>
+          </div>
+
+          {/* 🔹 Contact CTA */}
+          <div className="pt-4 border-t border-white/10">
+            <p className="text-indigo-200/60 text-sm">
+              Have questions or want to collaborate?
+            </p>
+            <p className="text-indigo-300 font-medium mt-1">
               support@connectra.com
             </p>
           </div>
 
-          {/* 🔹 Footer Note */}
-          <div className="pt-4 border-t border-white/10 text-xs text-indigo-200/40">
-            Last updated: July 2026
-          </div>
+        </div>
 
+        {/* 🔹 Footer */}
+        <div className="mt-10 text-center text-xs text-indigo-200/40">
+          © 2026 Connectra · Building better connections
         </div>
 
       </div>
@@ -100,4 +123,4 @@ const ShippingAndDeliveryPolicy = () => {
   );
 };
 
-export default ShippingAndDeliveryPolicy;
+export default AboutUs;

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-const CancellationPolicy = () => {
+const RefundPolicy = () => {
   // 🔹 Ref for background stars
   const rootRef = useRef(null);
 
-  // 🔹 Generate stars once
+  // 🔹 Generate stars
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -37,11 +37,11 @@ const CancellationPolicy = () => {
           </span>
 
           <h1 className="mt-4 text-4xl font-semibold bg-gradient-to-r from-indigo-200 via-indigo-400 to-purple-400 text-transparent bg-clip-text">
-            Cancellation Policy
+            Refund Policy
           </h1>
 
           <p className="mt-4 text-indigo-200/60 text-sm max-w-md mx-auto">
-            Learn about how and when you can cancel your orders or subscriptions.
+            Understand how refunds are processed and when you are eligible.
           </p>
         </div>
 
@@ -50,25 +50,25 @@ const CancellationPolicy = () => {
 
           {/* Rule 1 */}
           <div className="p-5 rounded-xl hover:bg-white/5 transition">
-            <p className="text-sm text-indigo-200/50">Cancellation Window</p>
-            <p className="text-blue-300 font-medium">
-              Orders can be cancelled within 24 hours of purchase.
+            <p className="text-sm text-indigo-200/50">Processing Time</p>
+            <p className="text-purple-300 font-medium">
+              Refunds are processed within 5–7 business days.
             </p>
           </div>
 
           {/* Rule 2 */}
           <div className="p-5 rounded-xl hover:bg-white/5 transition">
-            <p className="text-sm text-indigo-200/50">After 24 Hours</p>
-            <p className="text-purple-300 font-medium">
-              Requests after 24 hours may not be eligible for cancellation.
+            <p className="text-sm text-indigo-200/50">Payment Method</p>
+            <p className="text-blue-300 font-medium">
+              Refunds are credited to the original payment method.
             </p>
           </div>
 
           {/* Rule 3 */}
           <div className="p-5 rounded-xl hover:bg-white/5 transition">
-            <p className="text-sm text-indigo-200/50">Service-Based Orders</p>
+            <p className="text-sm text-indigo-200/50">Non-Refundable Cases</p>
             <p className="text-pink-300 font-medium">
-              Once a service has been started or delivered, cancellation is not possible.
+              No refunds for used services, digital goods, or policy violations.
             </p>
           </div>
 
@@ -83,4 +83,4 @@ const CancellationPolicy = () => {
   );
 };
 
-export default CancellationPolicy;
+export default RefundPolicy;
