@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import Body from "./components/Body";
-import Profile from "./components/profile/Profile.jsx";
+import Profile from "./components/profile/profile.jsx";
 import Login from "./components/Login";
 import Feed from "./components/Feed";
 import Requests from "./components/Requests";
