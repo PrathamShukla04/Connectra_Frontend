@@ -1,48 +1,35 @@
 import { useEffect, useRef, useState } from "react";
 
 const ContactUs = () => {
-  // 🔹 Ref for background stars
   const rootRef = useRef(null);
 
-  // 🔹 Form state (user inputs)
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  // 🔹 Create background stars
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
     for (let i = 0; i < 40; i++) {
       const star = document.createElement("div");
-      star.className =
-        "absolute w-[2px] h-[2px] bg-white/40 rounded-full";
-
+      star.className = "absolute w-[2px] h-[2px] bg-white/40 rounded-full";
       star.style.top = Math.random() * 100 + "%";
       star.style.left = Math.random() * 100 + "%";
-
       root.appendChild(star);
     }
   }, []);
 
-  // 🔹 Handle input change
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // 👉 For now (later connect backend)
     console.log("Contact Form:", form);
-
     alert("Message sent successfully 🚀");
-
-    // Reset form
     setForm({ name: "", email: "", message: "" });
   };
 
@@ -87,7 +74,7 @@ const ContactUs = () => {
               <div>
                 <p className="text-sm text-indigo-200/50">Email</p>
                 <p className="text-blue-300 font-medium">
-                  support@connectra.com
+                  support@devbridge.com
                 </p>
               </div>
             </div>
@@ -164,7 +151,7 @@ const ContactUs = () => {
 
         {/* 🔹 Footer */}
         <div className="mt-10 text-center text-xs text-indigo-200/40">
-          © 2026 Connectra · We usually reply within 24 hours
+          © 2026 DevBridge · We usually reply within 24 hours
         </div>
       </div>
     </div>

@@ -27,6 +27,7 @@ import Careers from "./components/footer/Careers.jsx";
 import Premium from "./components/Premium.jsx";
 import UserProfilePage from "./components/UserProfilePage.jsx";
 import SubscriptionStatus from "./components/SubscriptionStatus.jsx"
+import Discover from "./components/Discover.jsx";
 
 function App() {
   return (
@@ -49,19 +50,19 @@ function App() {
           <Route path="/media-centre" element={<MediaCenter />} />
           <Route path="/delivery-policy" element={<DeliveryPolicy />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path='/tech-news' element={<TechNews />} />
+          {/* 👈 /tech-news yahan se HATA diya */}
+
           <Route element={<Body />}>
-          <Route path="/requests" element={<Requests />} />
+            <Route path="/requests" element={<Requests />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/connections" element={<Connections />} />
-              <Route path="/profile/:userId" element={<UserProfilePage />} />
+            <Route path="/profile/:userId" element={<UserProfilePage />} />
             <Route path="/chat/:targetUserId" element={<Chat />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/premium" element={<Premium />} />
-            <Route
- path="/subscription-status"
- element={<SubscriptionStatus />}
-/>
+            <Route path="/subscription-status" element={<SubscriptionStatus />} />
+            <Route path="/tech-news" element={<TechNews />} /> 
+          <Route path="/discover" element={<Discover />}/>  {/* 👈 YAHAN ADD KIYA */}
           </Route>
 
         </Routes>

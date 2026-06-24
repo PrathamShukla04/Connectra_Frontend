@@ -3,23 +3,16 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Footer = () => {
-  // 🔹 Modal state (open/close)
   const [openModal, setOpenModal] = useState(false);
-
-  // 🔹 Service code input state
   const [code, setCode] = useState("");
 
-  // 🔹 Handle submit
   const handleSubmit = () => {
     console.log("Entered Code:", code);
-
-    // 👉 Demo validation (replace with backend later)
-    if (code === "CONNECTRA2026") {
-      alert("Valid Code 🎉");
+    if (code === "DEVBRIDGE2026") {
+      alert("Valid Code ✅");
     } else {
       alert("Invalid Code ❌");
     }
-
     setOpenModal(false);
     setCode("");
   };
@@ -27,153 +20,152 @@ const Footer = () => {
   return (
     <>
       <footer
-        className="relative bg-gradient-to-br from-[#0f0c29] via-[#1a1a40] to-[#0f0c29] 
-        text-gray-300 py-12 px-6 md:px-20 border-t border-white/10 overflow-hidden"
+        className="relative text-gray-300 py-12 px-6 md:px-20 border-t border-white/10 overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #0a0820 0%, #12104a 50%, #05030f 100%)",
+          fontFamily: "'Inter', sans-serif",
+        }}
       >
-        {/* 🔹 Background Glow */}
-        <div className="absolute w-72 h-72 bg-blue-500/20 blur-3xl rounded-full top-[-80px] left-[-80px]" />
-        <div className="absolute w-72 h-72 bg-indigo-500/20 blur-3xl rounded-full bottom-[-80px] right-[-80px]" />
+        {/* Background Glows */}
+        <div className="absolute rounded-full pointer-events-none"
+          style={{ top: -80, left: -80, width: 288, height: 288, background: "rgba(99,102,241,0.18)", filter: "blur(90px)" }}
+        />
+        <div className="absolute rounded-full pointer-events-none"
+          style={{ bottom: -80, right: -80, width: 288, height: 288, background: "rgba(139,92,246,0.18)", filter: "blur(90px)" }}
+        />
 
         <div className="relative max-w-6xl mx-auto">
 
-          {/* 🔹 Social Icons */}
-          <div className="flex justify-center gap-6 mb-10">
-            <div className="flex justify-center gap-6 mb-10">
-
-              {/* Facebook */}
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white/10 hover:bg-blue-600 hover:scale-110 transition"
-              >
-                <FaFacebookF />
-              </a>
-
-              {/* Instagram */}
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white/10 hover:bg-pink-500 hover:scale-110 transition"
-              >
-                <FaInstagram />
-              </a>
-
-              {/* Twitter */}
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white/10 hover:bg-blue-400 hover:scale-110 transition"
-              >
-                <FaTwitter />
-              </a>
-
-              {/* YouTube */}
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white/10 hover:bg-red-600 hover:scale-110 transition"
-              >
-                <FaYoutube />
-              </a>
-
+          {/* Logo */}
+          <div className="flex justify-center items-center gap-3 mb-8">
+            <div
+              className="flex items-center justify-center font-extrabold text-white text-base rounded-lg"
+              style={{ width: 36, height: 36, background: "#6c63ff" }}
+            >
+              D
             </div>
+            <span className="text-xl font-bold text-white">
+              Dev<span style={{ color: "#a78bfa" }}>Bridge</span>
+            </span>
           </div>
 
-          {/* 🔹 Links (UNCHANGED ROUTES ✅) */}
+          {/* Social Icons */}
+          <div className="flex justify-center gap-5 mb-10">
+            {[
+              { href: "https://facebook.com", icon: <FaFacebookF />, hover: "#1d4ed8" },
+              { href: "https://instagram.com", icon: <FaInstagram />, hover: "#db2777" },
+              { href: "https://twitter.com", icon: <FaTwitter />, hover: "#38bdf8" },
+              { href: "https://youtube.com", icon: <FaYoutube />, hover: "#dc2626" },
+            ].map(({ href, icon, hover }, i) => (
+              <a
+                key={i}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full transition-all duration-200"
+                style={{ background: "rgba(255,255,255,0.08)" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = hover;
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
+
+          {/* Links */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 text-sm text-center">
-
             <ul className="space-y-3">
-              <li><Link to="/terms-and-conditions">Terms & Conditions</Link></li>
-              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
-              <li><Link to="/contact-us">Contact Us</Link></li>
+              <li><Link to="/terms-and-conditions" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Terms & Conditions</Link></li>
+              <li><Link to="/privacy-policy" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Privacy Policy</Link></li>
+              <li><Link to="/contact-us" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Contact Us</Link></li>
             </ul>
-
             <ul className="space-y-3">
-              <li><Link to="/cancellation-and-refund-policy">Cancellation</Link></li>
-              <li><Link to="/shipping-and-delivery-policy">Shipping</Link></li>
-              <li><Link to="/media-centre">Media Centre</Link></li>
+              <li><Link to="/cancellation-and-refund-policy" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Cancellation</Link></li>
+              <li><Link to="/shipping-and-delivery-policy" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Shipping</Link></li>
+              <li><Link to="/media-centre" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Media Centre</Link></li>
             </ul>
-
             <ul className="space-y-3">
-              <li><Link to="/refund-policy">Refund Policy</Link></li>
-              <li><Link to="/delivery-policy">Delivery Policy</Link></li>
-              <li><Link to="/about-us">About Us</Link></li>
+              <li><Link to="/refund-policy" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Refund Policy</Link></li>
+              <li><Link to="/delivery-policy" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Delivery Policy</Link></li>
+              <li><Link to="/about-us" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">About Us</Link></li>
             </ul>
-
             <ul className="space-y-3">
-              <li><Link to="/faq">FAQ</Link></li>
-              <li><Link to="/support">Support</Link></li>
-              <li><Link to="/careers">Careers</Link></li>
+              <li><Link to="/faq" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">FAQ</Link></li>
+              <li><Link to="/support" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Support</Link></li>
+              <li><Link to="/careers" style={{ color: "rgba(165,180,252,0.65)" }} className="hover:text-purple-300 transition">Careers</Link></li>
             </ul>
-
           </div>
 
-          {/* 🔥 SERVICE CODE BUTTON */}
+          {/* Service Code Button */}
           <div className="mt-10 flex justify-center">
             <button
               onClick={() => setOpenModal(true)}
-              className="px-6 py-2 rounded-lg 
-              bg-gradient-to-r from-blue-500 to-indigo-600
-              text-white text-sm font-medium
-              hover:scale-105 transition shadow-lg"
+              className="px-6 py-2 rounded-lg text-white text-sm font-medium transition-all duration-200 shadow-lg"
+              style={{ background: "linear-gradient(90deg, #6c63ff, #a78bfa)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
             >
               Service Code
             </button>
           </div>
 
-          {/* 🔹 Divider */}
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent my-8" />
+          <div className="my-8" style={{ height: 1, background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
 
-          {/* 🔹 Copyright */}
-          <div className="text-center text-xs text-gray-400">
-            © 2026 Connectra. All rights reserved.
+          <div className="text-center text-xs" style={{ color: "rgba(165,180,252,0.4)" }}>
+            © 2026 DevBridge. All rights reserved.
           </div>
 
         </div>
       </footer>
 
-      {/* 🔥 MODAL */}
+      {/* Modal */}
       {openModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 px-4"
+          style={{ background: "rgba(0,0,0,0.65)" }}>
+          <div
+            className="w-full max-w-md text-center rounded-2xl p-6"
+            style={{
+              background: "linear-gradient(135deg, #0a0820, #12104a)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <h2 className="text-xl font-semibold text-white mb-4">Enter Service Code</h2>
 
-          <div className="bg-[#0f0c29] border border-white/10 rounded-2xl p-6 w-[90%] max-w-md text-center">
-
-            <h2 className="text-xl font-semibold text-white mb-4">
-              Enter Service Code
-            </h2>
-
-            {/* Input */}
             <input
               type="text"
               placeholder="Enter your code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white outline-none mb-4"
+              className="w-full px-4 py-3 rounded-lg text-white outline-none mb-4"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
             />
 
-            {/* Buttons */}
             <div className="flex gap-3">
-
               <button
                 onClick={() => setOpenModal(false)}
-                className="flex-1 py-2 rounded-lg bg-gray-600 hover:bg-gray-500"
+                className="flex-1 py-2 rounded-lg transition"
+                style={{ background: "rgba(255,255,255,0.08)", color: "rgba(165,180,252,0.7)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.14)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; }}
               >
                 Cancel
               </button>
-
               <button
                 onClick={handleSubmit}
-                className="flex-1 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600"
+                className="flex-1 py-2 rounded-lg text-white transition"
+                style={{ background: "#6c63ff" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#5b53ee"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "#6c63ff"; }}
               >
                 Submit
               </button>
-
             </div>
-
           </div>
         </div>
       )}

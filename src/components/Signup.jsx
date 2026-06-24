@@ -303,7 +303,7 @@ const Signup = () => {
                 className="text-[32px] font-extrabold text-white tracking-[-1px] mb-2"
                 style={{ fontFamily: "'Syne', sans-serif" }}
               >
-                Connectra
+                DevBridge
               </div>
               <div className="text-[15px] leading-[1.8] mb-10" style={{ color: "rgba(148,163,184,0.65)" }}>
                 Connect.<br />Collaborate.<br />Grow.

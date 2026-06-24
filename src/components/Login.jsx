@@ -178,28 +178,32 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    if (!emailId || !password) {
-      setError("Email and password are required");
-      return;
-    }
-    try {
-      setLoading(true);
-      setError("");
-      const res = await axios.post(
-        BASE_URL + "/login",
-        { emailId: emailId.trim(), password },
-        { withCredentials: true }
-      );
-      dispatch(addUser(res.data));
-      setSuccess(true);
-      setTimeout(() => navigate("/feed"), 600);
-    } catch (err) {
-      setError(err?.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleLogin = async () => {
+  if (!emailId || !password) {
+    setError("Email and password are required");
+    return;
+  }
+  try {
+    setLoading(true);
+    setError("");
+    await axios.post(
+      BASE_URL + "/login",
+      { emailId: emailId.trim(), password },
+      { withCredentials: true }
+    );
+    // Login ke baad fresh profile fetch karo — photoUrl bhi aayega
+    const profileRes = await axios.get(BASE_URL + "/profile/view", {
+      withCredentials: true,
+    });
+    dispatch(addUser(profileRes.data));
+    setSuccess(true);
+    setTimeout(() => navigate("/feed"), 600);
+  } catch (err) {
+    setError(err?.response?.data?.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleGoogleLogin = () => {
     window.location.href = BASE_URL + "/auth/google";
@@ -350,7 +354,7 @@ const Login = () => {
                 className="text-[32px] font-extrabold text-white tracking-tight mb-2"
                 style={{ fontFamily: "'Syne', sans-serif" }}
               >
-                Connectra
+                DevBridge
               </div>
               <div className="text-[15px] leading-[1.8] mb-10" style={{ color: "rgba(148,163,184,0.65)" }}>
                 Connect.<br />Collaborate.<br />Grow.
@@ -427,7 +431,7 @@ const Login = () => {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Connectra
+                  DevBridge
                 </span>
               </div>
               <div

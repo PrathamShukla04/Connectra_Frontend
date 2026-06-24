@@ -277,7 +277,7 @@ const Profile = () => {
                     </p>
                   )}
                   <p className="mt-1 text-sm font-medium" style={{ color:"rgba(148,163,184,0.45)" }}>
-                    {form.company && !user?.headline ? `@ ${form.company}` : form.company ? `@ ${form.company}` : "Connectra Member"}
+                    {form.company && !user?.headline ? `@ ${form.company}` : form.company ? `@ ${form.company}` : "DevBridge Member"}
                     {form.age ? ` · ${form.age} yrs` : ""}
                     {form.gender ? ` · ${form.gender}` : ""}
                   </p>

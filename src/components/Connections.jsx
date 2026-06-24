@@ -173,7 +173,7 @@ const navigate = useNavigate();
           {displayName}
         </div>
         <div className="text-xs mt-0.5 truncate" style={{ color: "rgba(148,163,184,0.5)" }}>
-          {user?.company ? `@ ${user.company}` : user?.about?.slice(0, 40) || "Connectra Member"}
+          {user?.company ? `@ ${user.company}` : user?.about?.slice(0, 40) || "DevBridge Member"}
         </div>
 
         {/* Location */}
@@ -356,7 +356,7 @@ const PendingCard = ({ request, onAccept, onReject }) => {
           {displayName}
         </div>
         <div className="text-xs mt-0.5 truncate" style={{ color: "rgba(148,163,184,0.5)" }}>
-          {user?.company ? `@ ${user.company}` : user?.about?.slice(0, 40) || "Connectra Member"}
+          {user?.company ? `@ ${user.company}` : user?.about?.slice(0, 40) || "DevBridge Member"}
         </div>
 
         {user?.location && (
@@ -412,7 +412,7 @@ const EmptyState = ({ tab }) => (
         {tab === "connections" ? "No connections yet" : "No pending requests"}
       </div>
       <div className="text-xs mt-1" style={{ color: "rgba(148,163,184,0.3)" }}>
-        {tab === "connections" ? "Start connecting with developers on Connectra" : "You're all caught up!"}
+        {tab === "connections" ? "Start connecting with developers on DevBridge" : "You're all caught up!"}
       </div>
     </div>
   </motion.div>
@@ -473,7 +473,7 @@ const Connections = () => {
   const handleAccept = async (requestId) => {
     try {
       await axios.post(
-        `${BASE_URL}/request/review/${requestId}/accepted`,
+        `${BASE_URL}/request/review/accepted/${requestId}`,
         {},
         { withCredentials: true }
       );
@@ -490,7 +490,7 @@ const Connections = () => {
   const handleReject = async (requestId) => {
     try {
       await axios.post(
-        `${BASE_URL}/request/review/${requestId}/rejected`,
+        `${BASE_URL}/request/review/rejected/${requestId}`,
         {},
         { withCredentials: true }
       );
@@ -504,7 +504,7 @@ const Connections = () => {
   /* ── Remove connection ── */
   const handleRemove = async (userId) => {
     try {
-      await axios.delete(`${BASE_URL}/connection/remove/${userId}`, { withCredentials: true });
+      await axios.delete(`${BASE_URL}/user/connection/remove/${userId}`, { withCredentials: true });
       setConnections(c => c.filter(u => u._id !== userId));
       showToast("Connection removed");
     } catch {
@@ -600,7 +600,7 @@ const Connections = () => {
                 </span>
               </h1>
               <p className="mt-1 text-sm" style={{ color: "rgba(148,163,184,0.4)" }}>
-                People you've connected with on Connectra
+                People you've connected with on DevBridge
               </p>
             </div>
             <div

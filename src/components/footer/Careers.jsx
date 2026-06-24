@@ -20,22 +20,17 @@ const jobs = [
 ];
 
 const Careers = () => {
-  // 🔹 Ref for background stars
   const rootRef = useRef(null);
 
-  // 🔹 Generate stars
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
 
     for (let i = 0; i < 40; i++) {
       const star = document.createElement("div");
-      star.className =
-        "absolute w-[2px] h-[2px] bg-white/40 rounded-full";
-
+      star.className = "absolute w-[2px] h-[2px] bg-white/40 rounded-full";
       star.style.top = Math.random() * 100 + "%";
       star.style.left = Math.random() * 100 + "%";
-
       root.appendChild(star);
     }
   }, []);
@@ -96,9 +91,9 @@ const Careers = () => {
 
         {/* 🔹 Footer CTA */}
         <div className="mt-10 text-center text-sm text-indigo-200/60">
-          Didn’t find a role? Reach out at{" "}
+          Didn't find a role? Reach out at{" "}
           <span className="text-indigo-300 font-medium">
-            careers@connectra.com
+            careers@devbridge.com
           </span>
         </div>
 

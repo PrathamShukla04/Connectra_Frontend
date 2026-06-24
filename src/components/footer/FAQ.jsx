@@ -3,51 +3,53 @@ import { useEffect, useRef, useState } from "react";
 const faqs = [
   {
     question: "How do I create an account?",
-    answer: "You can sign up using your email by visiting the signup page and filling in your details.",
+    answer:
+      "You can sign up using your email by visiting the signup page and filling in your details.",
   },
   {
     question: "How long does delivery take?",
-    answer: "Since we provide digital services, delivery usually happens within 1 hour after payment.",
+    answer:
+      "Since we provide digital services, delivery usually happens within 1 hour after payment.",
   },
   {
     question: "Can I get a refund?",
-    answer: "Refunds are processed based on our refund policy within 5–7 business days.",
+    answer:
+      "Refunds are processed based on our refund policy within 5–7 business days.",
   },
   {
     question: "Is my data secure?",
-    answer: "Yes, we use industry-standard security practices to keep your data safe and protected.",
+    answer:
+      "Yes, we use industry-standard security practices to keep your data safe and protected.",
   },
   {
     question: "How can I contact support?",
-    answer: "You can reach out to us anytime at support@connectra.com.",
+    answer: "You can reach out to us anytime at support@devbridge.com.",
   },
 ];
 
 const FAQ = () => {
-  // 🔹 Ref for background stars
   const rootRef = useRef(null);
-
-  // 🔹 Track open FAQ index
   const [openIndex, setOpenIndex] = useState(null);
 
-  // 🔹 Generate stars
+  // Generate background stars
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-
     for (let i = 0; i < 40; i++) {
       const star = document.createElement("div");
-      star.className =
-        "absolute w-[2px] h-[2px] bg-white/40 rounded-full";
-
-      star.style.top = Math.random() * 100 + "%";
-      star.style.left = Math.random() * 100 + "%";
-
+      star.style.cssText = `
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: rgba(255,255,255,0.35);
+        border-radius: 50%;
+        top: ${Math.random() * 100}%;
+        left: ${Math.random() * 100}%;
+      `;
       root.appendChild(star);
     }
   }, []);
 
-  // 🔹 Toggle FAQ open/close
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -55,70 +57,172 @@ const FAQ = () => {
   return (
     <div
       ref={rootRef}
-      className="min-h-screen bg-gradient-to-br from-[#0a0820] via-[#12104a] to-[#05030f] text-white px-6 py-20 relative overflow-hidden"
+      className="min-h-screen text-white px-6 py-20 relative overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, #0a0820 0%, #12104a 50%, #05030f 100%)",
+        fontFamily: "'Inter', sans-serif",
+      }}
     >
-      {/* 🔹 Background Glow */}
-      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-indigo-500/20 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-120px] right-[-120px] w-[400px] h-[400px] bg-purple-500/20 blur-[120px] rounded-full" />
+      {/* Background Glows */}
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          top: -80,
+          left: -80,
+          width: 320,
+          height: 320,
+          background: "rgba(99,102,241,0.18)",
+          filter: "blur(90px)",
+        }}
+      />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          bottom: -100,
+          right: -100,
+          width: 320,
+          height: 320,
+          background: "rgba(139,92,246,0.18)",
+          filter: "blur(90px)",
+        }}
+      />
 
-      {/* 🔹 Container */}
-      <div className="max-w-3xl mx-auto relative z-10">
+      {/* Main Container */}
+      <div className="max-w-2xl mx-auto relative z-10">
 
-        {/* 🔹 Header */}
-        <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-widest text-indigo-300 bg-indigo-500/10 px-4 py-1 rounded-full border border-indigo-400/20">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <span
+            className="text-xs font-semibold uppercase tracking-widest"
+            style={{
+              color: "#a5b4fc",
+              background: "rgba(99,102,241,0.1)",
+              border: "1px solid rgba(165,180,252,0.2)",
+              borderRadius: 20,
+              padding: "4px 14px",
+              display: "inline-block",
+              marginBottom: 16,
+              letterSpacing: "0.12em",
+            }}
+          >
             Support
           </span>
 
-          <h1 className="mt-4 text-4xl md:text-5xl font-semibold bg-gradient-to-r from-indigo-200 via-indigo-400 to-purple-400 text-transparent bg-clip-text">
+          <h1
+            className="text-4xl md:text-5xl font-bold"
+            style={{
+              lineHeight: 1.15,
+              background:
+                "linear-gradient(90deg, #c7d2fe, #818cf8, #a78bfa)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              marginBottom: 10,
+            }}
+          >
             Frequently Asked Questions
           </h1>
 
-          <p className="mt-4 text-indigo-200/60 text-sm max-w-md mx-auto">
-            Find answers to the most common questions about our platform and services.
+          <p
+            className="text-sm max-w-sm mx-auto"
+            style={{ color: "rgba(165,180,252,0.55)", lineHeight: 1.6 }}
+          >
+            Find answers to the most common questions about DevBridge
+            platform and services.
           </p>
         </div>
 
-        {/* 🔹 FAQ List */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 space-y-4">
-
+        {/* FAQ Card */}
+        <div
+          className="rounded-2xl p-5 flex flex-col gap-3"
+          style={{
+            background: "rgba(255,255,255,0.04)",
+            border: "1px solid rgba(255,255,255,0.09)",
+          }}
+        >
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-white/10 rounded-xl overflow-hidden"
+              className="rounded-xl overflow-hidden"
+              style={{ border: "1px solid rgba(255,255,255,0.09)" }}
             >
-              {/* 🔹 Question */}
+              {/* Question Button */}
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center px-4 py-4 text-left hover:bg-white/5 transition"
+                className="w-full flex justify-between items-center px-4 py-4 text-left transition-all"
+                style={{
+                  background:
+                    openIndex === index
+                      ? "rgba(108,99,255,0.12)"
+                      : "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "rgba(108,99,255,0.12)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    openIndex === index
+                      ? "rgba(108,99,255,0.12)"
+                      : "transparent";
+                }}
               >
-                <span className="text-sm font-medium text-indigo-200">
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: "#c7d2fe" }}
+                >
                   {faq.question}
                 </span>
-                <span className="text-indigo-300 text-lg">
-                  {openIndex === index ? "−" : "+"}
+                <span
+                  className="text-lg"
+                  style={{
+                    color: "#818cf8",
+                    display: "inline-block",
+                    transition: "transform 0.25s",
+                    transform:
+                      openIndex === index
+                        ? "rotate(45deg)"
+                        : "rotate(0deg)",
+                    minWidth: 22,
+                    textAlign: "center",
+                  }}
+                >
+                  +
                 </span>
               </button>
 
-              {/* 🔹 Answer */}
+              {/* Answer */}
               {openIndex === index && (
-                <div className="px-4 pb-4 text-sm text-indigo-200/70">
+                <div
+                  className="px-4 pb-4 text-sm"
+                  style={{
+                    color: "rgba(165,180,252,0.65)",
+                    lineHeight: 1.65,
+                  }}
+                >
                   {faq.answer}
                 </div>
               )}
             </div>
           ))}
-
         </div>
 
-        {/* 🔹 Footer CTA */}
-        <div className="mt-10 text-center text-sm text-indigo-200/60">
+        {/* Footer CTA */}
+        <div
+          className="mt-8 text-center text-sm"
+          style={{ color: "rgba(165,180,252,0.5)" }}
+        >
           Still have questions?{" "}
-          <span className="text-indigo-300 font-medium">
-            support@connectra.com
+          <span
+            className="font-semibold"
+            style={{ color: "#a78bfa" }}
+          >
+            support@devbridge.com
           </span>
         </div>
-
       </div>
     </div>
   );
