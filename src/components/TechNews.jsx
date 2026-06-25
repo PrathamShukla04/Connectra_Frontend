@@ -43,8 +43,6 @@ const StarCanvas = () => {
    CONFIG  –  GNews API (free: 100 req/day, CORS-friendly)
    Get your key → https://gnews.io
 ───────────────────────────────────── */
-const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const BASE = "https://gnews.io/api/v4";
 
 const CATEGORIES = [
   { id: "technology", label: "All Tech",  icon: <Cpu size={13} /> },
@@ -232,24 +230,16 @@ const TechNews = () => {
   }, []);
 
   /* ── Build GNews URL ── */
-  const buildUrl = (cat, q, pg) => {
-    const offset = (pg - 1) * PER_PAGE;          // GNews uses "from" offset via page math
-    const common = `&max=${PER_PAGE}&lang=en&apikey=${NEWS_API_KEY}`;
+// AB — BASE_URL apna import kar
+import { BASE_URL } from "../../utils/constants";
 
-    if (q) {
-      // Free-text search → /search
-      return `${BASE}/search?q=${encodeURIComponent(q)}&page=${pg}${common}`;
-    }
-
-    const keyword = CATEGORY_QUERY[cat];
-    if (keyword) {
-      // Non-native category → search endpoint
-      return `${BASE}/search?q=${encodeURIComponent(keyword)}&page=${pg}${common}`;
-    }
-
-    // Native GNews category → top-headlines
-    return `${BASE}/top-headlines?category=${cat}&page=${pg}${common}`;
-  };
+const buildUrl = (cat, q, pg) => {
+  const params = new URLSearchParams({ page: pg });
+  if (q)                    params.set("q", q);
+  else if (CATEGORY_QUERY[cat]) params.set("q", CATEGORY_QUERY[cat]);
+  else                      params.set("category", cat);
+  return `${BASE_URL}/api/news?${params}`;
+};
 
   /* ── Fetch ── */
   const fetchNews = useCallback(async (cat, q, pg = 1, append = false) => {
