@@ -118,7 +118,7 @@ useEffect(() => {
 }, []);
 
 const stats = [
-  { value: developerCount, suffix: "+", label: "Developers" }, // ✅ Live from DB
+  { value: developerCount || 50, suffix: "+", label: "Developers" }, // ✅ Live from DB
   { value: 100,            suffix: "+", label: "Projects" },
   { value: 1,            suffix: "", label: "Countries" },
   { value: 98,             suffix: "%", label: "Uptime" },

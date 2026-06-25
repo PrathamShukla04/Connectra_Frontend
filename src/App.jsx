@@ -28,7 +28,7 @@ import Premium from "./components/Premium.jsx";
 import UserProfilePage from "./components/UserProfilePage.jsx";
 import SubscriptionStatus from "./components/SubscriptionStatus.jsx"
 import Discover from "./components/Discover.jsx";
-
+import AIResumeBuilder from "./components/AIResumeBuilder.jsx";
 function App() {
   return (
     <Provider store={appStore}>
@@ -63,6 +63,7 @@ function App() {
             <Route path="/subscription-status" element={<SubscriptionStatus />} />
             <Route path="/tech-news" element={<TechNews />} /> 
           <Route path="/discover" element={<Discover />}/>  {/* 👈 YAHAN ADD KIYA */}
+          <Route path="/resume-builder" element={<AIResumeBuilder />} />
           </Route>
 
         </Routes>
