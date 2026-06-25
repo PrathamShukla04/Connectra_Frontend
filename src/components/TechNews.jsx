@@ -243,11 +243,6 @@ const buildUrl = (cat, q, pg) => {
 
   /* ── Fetch ── */
   const fetchNews = useCallback(async (cat, q, pg = 1, append = false) => {
-    if (!NEWS_API_KEY || NEWS_API_KEY === "YOUR_NEWS_API_KEY") {
-      setError("Add your GNews API key in VITE_NEWS_API_KEY. Get a free key at gnews.io");
-      setLoading(false);
-      return;
-    }
 
     // cancel previous in-flight request before starting a new one
     if (abortRef.current) abortRef.current.abort();
