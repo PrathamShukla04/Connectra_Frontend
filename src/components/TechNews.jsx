@@ -43,7 +43,7 @@ const StarCanvas = () => {
    CONFIG  –  GNews API (free: 100 req/day, CORS-friendly)
    Get your key → https://gnews.io
 ───────────────────────────────────── */
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL } from "../utils/constants";
 
 const CATEGORIES = [
   { id: "technology", label: "All Tech",  icon: <Cpu size={13} /> },
