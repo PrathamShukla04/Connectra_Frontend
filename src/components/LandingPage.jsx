@@ -159,10 +159,12 @@ const stats = [
         <div className="lp-noise fixed inset-0 pointer-events-none z-0" />
 
         {/* Glow orbs */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute rounded-full" style={{ width: 600, height: 600, background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)", top: -200, left: -200, filter: "blur(60px)" }} />
-          <div className="absolute rounded-full" style={{ width: 500, height: 500, background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)", bottom: -150, right: -150, filter: "blur(60px)" }} />
-        </div>
+        {/* Glow orbs */}
+<div className="absolute inset-0 pointer-events-none z-0">
+  <div className="absolute rounded-full" style={{ width: 600, height: 600, background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)", top: -200, left: -200, filter: "blur(60px)" }} />
+  <div className="absolute rounded-full" style={{ width: 500, height: 500, background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)", bottom: -150, right: -150, filter: "blur(60px)" }} />
+</div>
+
 
         {/* ── NAV ── */}
         <nav className="relative z-10 backdrop-blur-xl" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(6,6,20,0.6)" }}>

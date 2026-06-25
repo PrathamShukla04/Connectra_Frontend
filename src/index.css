@@ -355,6 +355,12 @@
   gap: 22px;
 }
 
+@media (max-width: 360px) {
+  .feed-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Empty state */
 .feed-empty {
   grid-column: 1 / -1;
@@ -415,7 +421,7 @@
 
 /* Glow orbs */
 .f-orb {
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   pointer-events: none;
   filter: blur(90px);

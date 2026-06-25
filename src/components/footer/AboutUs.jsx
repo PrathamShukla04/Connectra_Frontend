@@ -49,7 +49,7 @@ const AboutUs = () => {
         minHeight: "100vh",
         background: "linear-gradient(135deg, #060414 0%, #0d0b2e 40%, #0a0820 70%, #050210 100%)",
         color: "white",
-        padding: "80px 24px 60px",
+        padding: "clamp(48px, 10vw, 80px) clamp(16px, 4vw, 24px) clamp(40px, 8vw, 60px)",
         position: "relative",
         overflow: "hidden",
         fontFamily: "'Inter', sans-serif",
@@ -131,7 +131,7 @@ const AboutUs = () => {
           WebkitBackdropFilter: "blur(20px)",
           border: "1px solid rgba(255,255,255,0.08)",
           borderRadius: "20px",
-          padding: "40px",
+          padding: "clamp(20px, 5vw, 40px)",
           boxShadow: "0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)",
         }}>
 

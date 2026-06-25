@@ -335,8 +335,7 @@ const Navbar = () => {
             : "none",
         }}
       >
-        <div className="max-w-[1280px] mx-auto px-7 h-[62px] flex items-center justify-between gap-6">
-
+<div className="max-w-[1280px] mx-auto px-4 sm:px-7 h-[62px] flex items-center justify-between gap-6">
           {/* Logo */}
           <Link to="/feed" className="flex items-center gap-2.5 no-underline flex-shrink-0">
             <div

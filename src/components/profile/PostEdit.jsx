@@ -1,276 +1,3 @@
-
-// import React, { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import axios from "axios";
-// import { Heart, Send, Image as ImageIcon, Trash2 } from "lucide-react";
-// import { BASE_URL } from "../../utils/constants";
-
-// const PostEdit = () => {
-//     const user = useSelector((store) => store.user);
-//     const [caption, setCaption] = useState("");
-//     const [media, setMedia] = useState(null);
-//     const [posts, setPosts] = useState([]);
-//     const [commentTexts, setCommentTexts] = useState({});
-//     const [showComments, setShowComments] = useState({});
-
-//     const fetchPosts = async () => {
-//         try {
-//             const res = await axios.get(`${BASE_URL}/posts/user/${user._id}`, { withCredentials: true });
-//             setPosts(res.data);
-//         } catch (err) {
-//             console.error("Failed to fetch posts", err);
-//         }
-//     };
-
-//     useEffect(() => {
-//         if (user && user._id) fetchPosts();
-//     }, [user]);
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         if (!caption && !media) { alert("Add caption or media"); return; }
-//         const formData = new FormData();
-//         formData.append("caption", caption);
-//         if (media) formData.append("media", media);
-//         try {
-//             await axios.post(`${BASE_URL}/posts`, formData, {
-//                 headers: { "Content-Type": "multipart/form-data" },
-//                 withCredentials: true,
-//             });
-//             setCaption(""); setMedia(null); fetchPosts();
-//         } catch (err) { console.error("Failed to create post", err); }
-//     };
-
-//     const handleToggleLike = async (postId) => {
-//         try {
-//             await axios.post(`${BASE_URL}/posts/${postId}/like`, {}, { withCredentials: true });
-//             fetchPosts();
-//         } catch (err) { console.error("Failed to toggle like", err); }
-//     };
-
-//     const handleAddComment = async (postId) => {
-//         const text = commentTexts[postId];
-//         if (!text || text.trim() === "") return;
-//         try {
-//             await axios.post(`${BASE_URL}/posts/${postId}/comment`, { text }, { withCredentials: true });
-//             setCommentTexts((prev) => ({ ...prev, [postId]: "" }));
-//             fetchPosts();
-//         } catch (err) { console.error("Failed to add comment", err); }
-//     };
-
-//     const handleDeletePost = async (postId) => {
-//         if (!window.confirm("Are you sure you want to delete this post?")) return;
-//         try {
-//             await axios.delete(`${BASE_URL}/posts/${postId}`, { withCredentials: true });
-//             fetchPosts();
-//         } catch (err) { console.error("Failed to delete post", err); }
-//     };
-
-//     const formatDate = (dateString) => {
-//         return new Date(dateString).toLocaleDateString(undefined, {
-//             month: "short", day: "numeric", year: "numeric",
-//         });
-//     };
-
-//     return (
-//         <div className="max-w-xl mx-auto p-4 sm:p-6 bg-[#0d1117] min-h-screen">
-//             <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-b border-white/10 pb-3 text-white">
-//                 Create Post
-//             </h2>
-
-//             {/* Create Post Form */}
-//             <form
-//                 onSubmit={handleSubmit}
-//                 className="mb-8 sm:mb-10 bg-[#161b2e] p-4 sm:p-6 rounded-2xl border border-white/5"
-//             >
-//                 <textarea
-//                     placeholder="What's on your mind?"
-//                     value={caption}
-//                     onChange={(e) => setCaption(e.target.value)}
-//                     className="w-full p-3 sm:p-4 bg-[#0d1117] border border-white/5 rounded-xl resize-none mb-4 text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-600/40 focus:border-violet-600/50 transition text-sm"
-//                     rows={4}
-//                 />
-//                 <label
-//                     htmlFor="media-upload"
-//                     className="inline-flex items-center gap-2 cursor-pointer text-violet-400 hover:text-violet-300 font-medium mb-4 select-none text-sm transition"
-//                     title="Add photo or video"
-//                 >
-//                     <ImageIcon className="h-5 w-5" />
-//                     <span>{media ? media.name : "Add photo or video"}</span>
-//                 </label>
-//                 <input
-//                     id="media-upload"
-//                     type="file"
-//                     accept="image/*,video/*"
-//                     onChange={(e) => setMedia(e.target.files[0])}
-//                     className="hidden"
-//                 />
-//                 <button
-//                     type="submit"
-//                     disabled={!caption && !media}
-//                     className={`w-full py-2.5 rounded-xl text-white text-sm font-semibold transition ${
-//                         !caption && !media
-//                             ? "bg-violet-600/30 cursor-not-allowed"
-//                             : "bg-violet-600 hover:bg-violet-500"
-//                     }`}
-//                 >
-//                     Post
-//                 </button>
-//             </form>
-
-//             <h2 className="text-2xl sm:text-3xl font-bold mb-5 border-b border-white/10 pb-3 text-white">
-//                 Your Posts
-//             </h2>
-
-//             {posts.length === 0 && (
-//                 <p className="text-gray-600 text-center text-sm mt-10">No posts yet.</p>
-//             )}
-
-//             {posts.map((post) => {
-//                 const liked = post.likes.some((u) => u === user._id || u._id === user._id);
-//                 const expanded = showComments[post._id] || false;
-//                 const commentsToShow = expanded ? post.comments : post.comments.slice(0, 3);
-//                 const isOwner = post.user._id === user._id || post.user === user._id;
-
-//                 return (
-//                     <article
-//                         key={post._id}
-//                         className="mb-6 sm:mb-8 bg-[#161b2e] rounded-2xl border border-white/5 overflow-hidden"
-//                     >
-//                         {/* Header */}
-//                         <header className="flex items-center justify-between p-4 sm:p-5 border-b border-white/5">
-//                             <div className="flex items-center gap-3">
-//                                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-[#1e2640] flex-shrink-0">
-//                                     <img
-//                                         src={post.user.profilePicture || `https://ui-avatars.com/api/?name=${post.user.firstName}+${post.user.lastName}&background=5b21b6&color=fff`}
-//                                         alt={`${post.user.firstName} ${post.user.lastName}`}
-//                                         className="object-cover w-full h-full"
-//                                     />
-//                                 </div>
-//                                 <div>
-//                                     <h3 className="font-semibold text-gray-100 text-sm sm:text-base">
-//                                         {post.user.firstName} {post.user.lastName}
-//                                     </h3>
-//                                     <time className="text-xs text-gray-500">{formatDate(post.createdAt)}</time>
-//                                 </div>
-//                             </div>
-//                             {isOwner && (
-//                                 <button
-//                                     onClick={() => handleDeletePost(post._id)}
-//                                     className="text-gray-600 hover:text-red-400 transition p-1.5 rounded-lg hover:bg-red-400/10"
-//                                     title="Delete post"
-//                                 >
-//                                     <Trash2 className="h-4 w-4 sm:h-5 sm:w-5" />
-//                                 </button>
-//                             )}
-//                         </header>
-
-//                         {/* Body */}
-//                         <div className="p-4 sm:p-5">
-//                             {post.caption && (
-//                                 <p className="mb-4 text-gray-200 whitespace-pre-wrap text-sm sm:text-base leading-relaxed">
-//                                     {post.caption}
-//                                 </p>
-//                             )}
-
-//                             {post.mediaUrl && (
-//                                 /\.(mp4|mov|mkv)$/i.test(post.mediaUrl) ? (
-//                                     <video controls className="w-full rounded-xl mb-4">
-//                                         <source src={post.mediaUrl} type="video/mp4" />
-//                                     </video>
-//                                 ) : (
-//                                     <img src={post.mediaUrl} alt="Post media" className="w-full rounded-xl mb-4 object-cover" />
-//                                 )
-//                             )}
-
-//                             {/* Like + Comment toggle */}
-//                             <div className="flex items-center gap-5 mb-4 text-gray-500">
-//                                 <button
-//                                     onClick={() => handleToggleLike(post._id)}
-//                                     className={`flex items-center gap-1.5 transition text-sm ${liked ? "text-red-400" : "hover:text-red-400"}`}
-//                                 >
-//                                     <Heart className="h-5 w-5" fill={liked ? "currentColor" : "none"} strokeWidth={2} />
-//                                     <span className="font-medium">{post.likes.length}</span>
-//                                 </button>
-//                                 <button
-//                                     onClick={() => setShowComments((prev) => ({ ...prev, [post._id]: !expanded }))}
-//                                     className="text-sm font-medium hover:text-violet-400 transition"
-//                                 >
-//                                     Comments ({post.comments.length})
-//                                 </button>
-//                             </div>
-
-//                             {/* Comments */}
-//                             <section className="border-t border-white/5 pt-4">
-//                                 {post.comments.length === 0 && (
-//                                     <p className="text-gray-600 italic text-xs mb-3">No comments yet.</p>
-//                                 )}
-//                                 <ul className="mb-3 max-h-48 overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-//                                     {commentsToShow.map((comment) => (
-//                                         <li key={comment._id} className="flex gap-3 items-start">
-//                                             <div className="w-7 h-7 rounded-full overflow-hidden bg-[#1e2640] flex-shrink-0">
-//                                                 <img
-//                                                     src={comment.user.profilePicture || `https://ui-avatars.com/api/?name=${comment.user.firstName}+${comment.user.lastName}&background=5b21b6&color=fff`}
-//                                                     alt={`${comment.user.firstName}`}
-//                                                     className="object-cover w-full h-full"
-//                                                 />
-//                                             </div>
-//                                             <div>
-//                                                 <p className="text-xs text-gray-300">
-//                                                     <strong className="text-gray-100">{comment.user.firstName} {comment.user.lastName}</strong>{" "}
-//                                                     {comment.text}
-//                                                 </p>
-//                                                 <time className="text-[10px] text-gray-600">{formatDate(comment.createdAt)}</time>
-//                                             </div>
-//                                         </li>
-//                                     ))}
-//                                 </ul>
-//                                 {post.comments.length > 3 && (
-//                                     <button
-//                                         onClick={() => setShowComments((prev) => ({ ...prev, [post._id]: !expanded }))}
-//                                         className="text-xs text-violet-400 hover:underline"
-//                                     >
-//                                         {expanded ? "View less" : `View all ${post.comments.length} comments`}
-//                                     </button>
-//                                 )}
-//                             </section>
-
-//                             {/* Add Comment */}
-//                             <form
-//                                 onSubmit={(e) => { e.preventDefault(); handleAddComment(post._id); }}
-//                                 className="flex items-center gap-2 mt-4"
-//                             >
-//                                 <input
-//                                     type="text"
-//                                     placeholder="Add a comment..."
-//                                     value={commentTexts[post._id] || ""}
-//                                     onChange={(e) => setCommentTexts((prev) => ({ ...prev, [post._id]: e.target.value }))}
-//                                     className="flex-1 min-w-0 px-3 py-2 bg-[#0d1117] border border-white/5 rounded-xl text-gray-100 placeholder-gray-600 text-xs focus:outline-none focus:ring-1 focus:ring-violet-600/40 transition"
-//                                 />
-//                                 <button
-//                                     type="submit"
-//                                     disabled={!commentTexts[post._id] || commentTexts[post._id].trim() === ""}
-//                                     className={`p-2 rounded-xl transition shrink-0 ${
-//                                         !commentTexts[post._id] || commentTexts[post._id].trim() === ""
-//                                             ? "bg-white/5 text-gray-600 cursor-not-allowed"
-//                                             : "bg-violet-600 text-white hover:bg-violet-500"
-//                                     }`}
-//                                 >
-//                                     <Send className="h-4 w-4 rotate-90" />
-//                                 </button>
-//                             </form>
-//                         </div>
-//                     </article>
-//                 );
-//             })}
-//         </div>
-//     );
-// };
-
-// export default PostEdit;
-
-
-
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -360,9 +87,11 @@ const PostEdit = () => {
         // Page heading — "My Network" style
         pageHeading: {
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: 28,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",   // 👈 added: chhoti screen pe badge niche wrap ho jayega, squeeze nahi hoga
+    gap: 10,             // 👈 added: wrap hone par heading aur badge ke beech spacing
+    marginBottom: 28,
         },
         headingText: {
             margin: 0,
@@ -554,14 +283,15 @@ const PostEdit = () => {
             margin: 0,
         },
         actionRow: {
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            marginTop: 14,
-            marginBottom: 14,
-            paddingTop: 12,
-            borderTop: "1px solid rgba(255,255,255,0.05)",
-        },
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    flexWrap: "wrap",   // 👈 added: safety, taaki long counts pe overflow na ho
+    marginTop: 14,
+    marginBottom: 14,
+    paddingTop: 12,
+    borderTop: "1px solid rgba(255,255,255,0.05)",
+},
         actionBtn: {
             display: "inline-flex",
             alignItems: "center",

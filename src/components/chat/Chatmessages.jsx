@@ -14,7 +14,7 @@ const ChatMessages = ({ messages, userId, messagesEndRef }) => {
       {messages.length === 0 && (
         <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-600 select-none">
           <p className="text-sm">No messages yet</p>
-          <p className="text-xs">Say hello 👋</p>
+          <p className="text-xs">Say hello </p>
         </div>
       )}
 

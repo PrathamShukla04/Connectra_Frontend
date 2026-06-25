@@ -275,9 +275,8 @@ const Request = () => {
         position: "relative", overflowX: "hidden", paddingBottom: 80,
       }}>
         <StarCanvas />
-        <div style={{ position: "fixed", width: 500, height: 500, borderRadius: "50%", pointerEvents: "none", zIndex: 0, background: "radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 70%)", top: -100, right: -100, filter: "blur(80px)" }} />
-        <div style={{ position: "fixed", width: 400, height: 400, borderRadius: "50%", pointerEvents: "none", zIndex: 0, background: "radial-gradient(circle,rgba(139,92,246,0.05) 0%,transparent 70%)", bottom: 50, left: -100, filter: "blur(80px)" }} />
-
+<div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", pointerEvents: "none", zIndex: 0, background: "radial-gradient(circle,rgba(99,102,241,0.07) 0%,transparent 70%)", top: -100, right: -100, filter: "blur(80px)" }} />
+<div style={{ position: "absolute", width: 400, height: 400, borderRadius: "50%", pointerEvents: "none", zIndex: 0, background: "radial-gradient(circle,rgba(139,92,246,0.05) 0%,transparent 70%)", bottom: 50, left: -100, filter: "blur(80px)" }} />
         <div style={{ position: "relative", zIndex: 10, maxWidth: 1100, margin: "0 auto", padding: "40px 20px 0" }}>
 
           {/* Header */}
@@ -370,7 +369,7 @@ const Request = () => {
           ) : (
             <motion.div layout style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))",
               gap: 20,
             }}>
               <AnimatePresence>

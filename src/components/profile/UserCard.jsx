@@ -39,7 +39,7 @@ const UserCard = ({ user }) => {
 
   return (
     <div
-      className="w-80 h-[520px] rounded-3xl overflow-hidden flex flex-col
+      className="w-full max-w-80 h-[520px] rounded-3xl overflow-hidden flex flex-col
       bg-white/5 backdrop-blur-xl border border-white/10 
       shadow-[0_20px_60px_rgba(0,0,0,0.6)]
       hover:scale-[1.02] transition duration-300"

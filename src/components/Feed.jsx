@@ -367,15 +367,15 @@ const Feed = () => {
     }}>
       {/* Ambient glows */}
       <div style={{
-        position: "fixed", top: "-80px", left: "-80px", width: "400px", height: "400px",
-        background: "radial-gradient(circle, rgba(99,78,220,0.14) 0%, transparent 70%)",
-        pointerEvents: "none", zIndex: 0,
-      }} />
-      <div style={{
-        position: "fixed", bottom: "-80px", right: "-60px", width: "360px", height: "360px",
-        background: "radial-gradient(circle, rgba(139,92,246,0.11) 0%, transparent 70%)",
-        pointerEvents: "none", zIndex: 0,
-      }} />
+  position: "absolute", top: "-80px", left: "-80px", width: "400px", height: "400px",
+  background: "radial-gradient(circle, rgba(99,78,220,0.14) 0%, transparent 70%)",
+  pointerEvents: "none", zIndex: 0,
+}} />
+<div style={{
+  position: "absolute", bottom: "-80px", right: "-60px", width: "360px", height: "360px",
+  background: "radial-gradient(circle, rgba(139,92,246,0.11) 0%, transparent 70%)",
+  pointerEvents: "none", zIndex: 0,
+}} />
 
       <div style={{
         maxWidth: "680px",
